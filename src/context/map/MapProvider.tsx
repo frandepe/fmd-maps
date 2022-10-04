@@ -49,6 +49,7 @@ export const MapProvider = ({ children }: Props) => {
       newMarkers.push(newMarker);
     }
     dispatch({ type: "setMarkers", payload: newMarkers });
+    console.log(state);
   }, [places]);
 
   const setMap = (map: Map) => {
@@ -113,12 +114,12 @@ export const MapProvider = ({ children }: Props) => {
     };
 
     if (state.map?.getLayer("RouteString")) {
-      state.map.removeLayer("RouteString");
       state.map.removeSource("RouteString");
+      state.map.removeLayer("RouteString");
     }
 
     state.map?.addSource("RouteString", sourceData);
-
+    //todo si el input esta vacio, quiero que me borre el addLayer (removeLayer)
     state.map?.addLayer({
       id: "RouteString",
       type: "line",
